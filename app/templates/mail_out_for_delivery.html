@@ -1,0 +1,11 @@
+<body>
+    <p>Hi, </p>
+    <p>Your order with {{ seller }} is out for delivery with {{ partner }} </p>
+    <p>and is on its way to you.</p>
+
+    {% if verification_code %}
+    <p>Your verification code is {{ verification_code }}</p>
+    {% endif %}
+    <br>
+    <p>Thank you for shopping with us!</p>
+</body>
