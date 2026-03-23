@@ -45,7 +45,7 @@ async def custom_middleware(request: Request, call_next):
     end = perf_counter()
     time_taken = round(end - start, 2)
 
-    add_log.delay(f"Request: {request.method} {request.url} ({response.status_code}) completed in {time_taken} seconds.")  # noqa: F821
+    add_log.delay(f"Request: {request.method} {request.url} ({response.status_code}) completed in {time_taken} seconds.") 
     
     return response
 
