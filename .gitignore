@@ -1,11 +1,4 @@
-venv/
 __pycache__/
-.pytest_cache/
-.mypy_cache/
 .vscode/
-
-.env
-dump.rdb
-file.log
-sqlite.db
 *.pyc
+.DS_Store
