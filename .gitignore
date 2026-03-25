@@ -2,3 +2,6 @@ __pycache__/
 .vscode/
 *.pyc
 .DS_Store
+aws credentials/
+*.csv
+thingsToFix.md

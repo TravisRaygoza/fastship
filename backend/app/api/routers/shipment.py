@@ -101,6 +101,15 @@ async def submit_review(
     await service.rate(token, rating, comment)
     return {"detail": "Review submitted successfully."}
 
+############Adding view to see all shipments for seller and partner######
+@router.get("/seller", response_model=list[ShipmentRead])
+async def get_all_seller_shipments(seller: seller_dependency):
+    return seller.shipments
+
+@router.get("/partner", response_model=list[ShipmentRead])
+async def get_all_partner_shipments(partner: deliveryPartner_dependency):
+    return partner.shipments
+
 
 # This is a post endpoint to create a new shipment
 @router.post("/", response_model=ShipmentRead, status_code=status.HTTP_201_CREATED)
@@ -110,6 +119,7 @@ async def submit_shipment(
     service: shipment_dependency,
 ) -> Shipment:
     return await service.add(shipment, seller)
+
 
 
 @router.get("/{id}", response_model=ShipmentRead, status_code=status.HTTP_200_OK)
