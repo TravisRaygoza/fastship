@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router"
 import type { ShipmentRead, ShipmentStatus } from "~/lib/client"
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { Badge } from "~/components/ui/badge"
@@ -10,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog"
+import { useAuth } from "~/contexts/auth-context"
 
 const statusColors: Record<string, string> = {
   placed: "bg-blue-100 text-blue-800",
@@ -34,9 +36,13 @@ function formatDate(dateStr: string) {
 }
 
 export function ShipmentCard({ shipment }: { shipment: ShipmentRead }) {
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const status = shipment.timeline?.length
     ? shipment.timeline[shipment.timeline.length - 1].status
     : "placed"
+  const isDelivered = status === "delivered"
+  const isCancelled = status === "cancelled"
 
   return (
     <Dialog>
@@ -126,6 +132,15 @@ export function ShipmentCard({ shipment }: { shipment: ShipmentRead }) {
                 ))}
               </div>
             </div>
+          )}
+
+          {user === "partner" && !isDelivered && !isCancelled && (
+            <Button
+              className="w-full"
+              onClick={() => navigate(`/partner/update-shipment?id=${shipment.id}`)}
+            >
+              Update Status
+            </Button>
           )}
         </div>
       </DialogContent>
