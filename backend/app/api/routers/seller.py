@@ -38,10 +38,15 @@ async def login_seller(
 
 #### Verify Seller Email
 @router.get("/verify")
-async def verify_seller_email(token: str, service: seller_service_dependency):
+async def verify_seller_email(request: Request, token: str, service: seller_service_dependency):
     await service.verify_email(token)
 
-    return {"detail": "Email successfully verified."}
+    templates = Jinja2Templates(TEMPLATE_DIR)
+    return templates.TemplateResponse(
+        request=request,
+        name="email_verified.html",
+        context={"login_url": f"http://{app_settings.APP_DOMAIN}/seller/login"}
+    )
 
 
 #### Password Reset Link

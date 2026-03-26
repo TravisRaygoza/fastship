@@ -701,6 +701,42 @@ export class Api<
      * No description
      *
      * @tags shipments
+     * @name GetAllSellerShipmentsShipmentsSellerGet
+     * @summary Get All Seller Shipments
+     * @request GET:/shipments/seller
+     * @secure
+     */
+    getAllSellerShipmentsShipmentsSellerGet: (params: RequestParams = {}) =>
+      this.request<ShipmentRead[], any>({
+        path: `/shipments/seller`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags shipments
+     * @name GetAllPartnerShipmentsShipmentsPartnerGet
+     * @summary Get All Partner Shipments
+     * @request GET:/shipments/partner
+     * @secure
+     */
+    getAllPartnerShipmentsShipmentsPartnerGet: (params: RequestParams = {}) =>
+      this.request<ShipmentRead[], any>({
+        path: `/shipments/partner`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags shipments
      * @name SubmitShipmentShipmentsPost
      * @summary Submit Shipment
      * @request POST:/shipments/

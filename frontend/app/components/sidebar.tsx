@@ -20,8 +20,7 @@ export function Sidebar() {
   }
 
   const navItems = [
-    { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { path: "/account", label: "Account", icon: User },
+    { path: user === "seller" ? "/seller/dashboard" : "/partner/dashboard", label: "Dashboard", icon: LayoutDashboard },
     ...(user === "seller"
       ? [{ path: "/seller/submit-shipment", label: "Submit Shipment", icon: Plus }]
       : [{ path: "/partner/update-shipment", label: "Update Shipment", icon: RefreshCw }]),

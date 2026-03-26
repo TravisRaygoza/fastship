@@ -65,6 +65,10 @@ export function ShipmentCard({ shipment }: { shipment: ShipmentRead }) {
           <DialogTitle>Shipment Details</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
+          <div className="text-sm">
+            <p className="text-muted-foreground">Shipment ID</p>
+            <p className="font-mono text-xs font-medium break-all">{shipment.id}</p>
+          </div>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div>
               <p className="text-muted-foreground">Content</p>

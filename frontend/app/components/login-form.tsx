@@ -38,7 +38,7 @@ export function LoginForm({
 
       const { data } = await loginFn({ username: email, password })
       login(data.access_token, user)
-      navigate("/dashboard")
+      navigate(`/${user}/dashboard`)
     } catch (err: any) {
       const detail = err?.response?.data?.detail
       setError(typeof detail === "string" ? detail : "Login failed. Please try again.")
@@ -73,7 +73,15 @@ export function LoginForm({
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <div className="flex items-center">
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <a
+                    href={`/${user}/forgot-password`}
+                    className="ml-auto text-sm underline-offset-2 hover:underline"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
                 <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
@@ -83,7 +91,7 @@ export function LoginForm({
               </Field>
               <FieldDescription className="text-center">
                 Don&apos;t have an account?{" "}
-                <a href="#">Sign up</a>
+                <a href={`/${user}/signup`}>Sign up</a>
               </FieldDescription>
               <FieldDescription className="text-center">
                 <a href={user === "seller" ? "/partner/login" : "/seller/login"}>

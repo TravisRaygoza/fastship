@@ -84,6 +84,7 @@ class ShipmentEventService(BaseService):
                 context["order_id"] = shipment.id
                 context["seller"] = shipment.seller.name
                 context["partner"] = shipment.delivery_partner.name
+                context["domain"] = app_settings.APP_DOMAIN
                 template_name="mail_placed.html"
             
             case ShipmentStatus.out_for_delivery:

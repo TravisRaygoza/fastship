@@ -3,7 +3,7 @@
     <p>Your order with {{ seller }} is picked up by {{ partner }}</p>
     <p>and is on its way to you.</p>
     <p>Use the link below to track your order:</p>
-    <a href="http://localhost:8000/shipments/track?id={{ id }}"
+    <a href="http://{{ domain }}/shipments/track?id={{ order_id }}"
     style="color: blue; text-decoration: underline;">Track your order</a>
     <br>
     <p>Thank you for shopping with us!</p>

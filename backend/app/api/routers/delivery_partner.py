@@ -1,9 +1,12 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.templating import Jinja2Templates
 
 from app.core.exceptions import DeliveryPartnerNotAvailable
 from app.database.redis import add_jti_to_blacklist
+from app.services.utils import TEMPLATE_DIR
+from app.config import app_settings
 
 from ..schemas.delivery_partner import (
     DeliveryPartnerCreate,
@@ -43,14 +46,17 @@ async def login_delivery_partner(
     }
 
 
-#### Verify Delivery Partner Email 
+#### Verify Delivery Partner Email
 @router.get("/verify")
-async def verify_delivery_partner_email(token: str, service: deliveryPartnerServiceDep):
+async def verify_delivery_partner_email(request: Request, token: str, service: deliveryPartnerServiceDep):
     await service.verify_email(token)
 
-    return {
-        "detail": "Email successfully verified."
-    }
+    templates = Jinja2Templates(TEMPLATE_DIR)
+    return templates.TemplateResponse(
+        request=request,
+        name="email_verified.html",
+        context={"login_url": f"http://{app_settings.APP_DOMAIN}/partner/login"}
+    )
 
 
 
